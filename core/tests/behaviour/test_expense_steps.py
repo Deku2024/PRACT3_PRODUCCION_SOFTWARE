@@ -56,9 +56,14 @@ def check_expenses_length(context, expenses):
     assert expenses == total
 
 
-@when(parsers.parse("Actualizo el gasto con id {expense_id:d} haciendo que sea de {amount:d} euros"))
+@when(
+    parsers.parse(
+        "Actualizo el gasto con id {expense_id:d} haciendo que sea de {amount:d} euros"
+    )
+)
 def update_expense_amount(context, expense_id, amount):
     context["service"].update_expense(expense_id=expense_id, amount=amount)
+
 
 @then(parsers.parse("el programa devuelve error de nombre inválido"))
 def check_empty_title_error(context):
