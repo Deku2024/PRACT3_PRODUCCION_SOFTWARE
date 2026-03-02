@@ -54,3 +54,16 @@ def check_month_total(context, month_name, expected_total):
 def check_expenses_length(context, expenses):
     total = len(context["db"]._expenses)
     assert expenses == total
+
+
+@when(parsers.parse("Actualizo el gasto con id {expense_id:d} haciendo que sea de {amount:d} euros"))
+def update_expense_amount(context, expense_id, amount):
+    context["service"].update_expense(expense_id=expense_id, amount=amount)
+
+@then(parsers.parse("el programa devuelve error de nombre inválido"))
+def check_empty_title_error(context):
+    with pytest.raises(ErrorEmptyTitle) as exc_info:
+        context["service"].create_expense(
+            title="", amount=10, description="", expense_date=date.today()
+        )
+    assert "El título del gasto no puede estar vacío" in str(exc_info.value)

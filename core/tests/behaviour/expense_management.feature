@@ -26,7 +26,46 @@ Feature: Gestión de gastos
     Then el total de dinero gastado debe ser 15 euros
 
   Scenario: Crear tres gastos diferentes que sumen 30 euros hace que el total sean 30 euros
+    Given un gestor de gastos vacío
+    When añado un gasto de 10 euros llamado Camiseta
+    And añado un gasto de 5 euros llamado Calcetines
+    And añado un gasto de 15 euros llamado Sudadera
+    Then el total de dinero gastado debe ser 30 euros
 
   Scenario: Crear tres gastos de 10, 30, 30 euros y elimino el ultimo gasto la suma son 40 euros
+    Given un gestor de gastos vacío
+    When añado un gasto de 10 euros llamado Bolso
+    And añado un gasto de 30 euros llamado Chaqueta
+    And añado un gasto de 30 euros llamado Pantalones
+    And elimino el gasto con id 2
+    Then el total de dinero gastado debe ser 40 euros
 
   Scenario: Crear tres gastos de 10, 30, 30 euros y elimino el ultimo gasto la suma son 40 euros
+    Given un gestor de gastos vacío
+    When añado un gasto de 10 euros llamado Mantel
+    And añado un gasto de 30 euros llamado Mesa
+    And añado un gasto de 30 euros llamado Maceta
+    And elimino el gasto con id 2
+    Then el total de dinero gastado debe ser 40 euros
+
+  Scenario: Crear tres gastos de 10, 30, 30 euros y elimino los dos ultimos gastos la suma son 10 euros
+    Given un gestor de gastos vacío
+    When añado un gasto de 10 euros llamado Mantel
+    And añado un gasto de 30 euros llamado Mesa
+    And añado un gasto de 30 euros llamado Maceta
+    And elimino el gasto con id 2
+    And elimino el gato con id 1
+    Then el total de dinero gastado debe ser 10 euros
+  
+  Scenario: Crear tres gastos diferentes que sumen 30 euros y actualizo el ultimo gasto la suma son 35 euros
+    Given un gestor de gastos vacío
+    When añado un gasto de 10 euros llamado Camiseta
+    And añado un gasto de 5 euros llamado Calcetines
+    And añado un gasto de 15 euros llamado Sudadera
+    And actualizo el gasto con id 2 haciendo que sea de 20 euros
+    Then el total de dinero gastado debe ser 35 euros
+
+  Scenario: Crear un gasto con nombre vacio y el programa devuelve error
+    Given un gestor de gastos vacío
+    When añado un gasto de 10 euros sin nombre
+    Then el programa devuelve error
