@@ -54,7 +54,7 @@ Feature: Gestión de gastos
     And añado un gasto de 30 euros llamado Mesa
     And añado un gasto de 30 euros llamado Maceta
     And elimino el gasto con id 2
-    And elimino el gato con id 1
+    And elimino el gasto con id 3
     Then el total de dinero gastado debe ser 10 euros
   
   Scenario: Crear tres gastos diferentes que sumen 30 euros y actualizo el ultimo gasto la suma son 35 euros
@@ -62,10 +62,10 @@ Feature: Gestión de gastos
     When añado un gasto de 10 euros llamado Camiseta
     And añado un gasto de 5 euros llamado Calcetines
     And añado un gasto de 15 euros llamado Sudadera
-    And actualizo el gasto con id 2 haciendo que sea de 20 euros
+    And actualizo el gasto con id 3 haciendo que sea de 20 euros
     Then el total de dinero gastado debe ser 35 euros
 
   Scenario: Crear un gasto con nombre vacio y el programa devuelve error
     Given un gestor de gastos vacío
-    When añado un gasto de 10 euros sin nombre
-    Then el programa devuelve error
+    When añado un gasto de 10 euros llamado ""
+    Then el programa devuelve error de nombre inválido
