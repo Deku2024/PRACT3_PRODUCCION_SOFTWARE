@@ -1,7 +1,7 @@
 from datetime import date
 import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
-from core.domain_error import ErrorEmptyTitle
+from core.domain_error import EmptyTitleError
 from core.expense_service import ExpenseService
 from core.in_memory_expense_repository import InMemoryExpenseRepository
 
@@ -67,7 +67,7 @@ def update_expense_amount(context, expense_id, amount):
 
 @then(parsers.parse("el programa devuelve error de nombre inválido"))
 def check_empty_title_error(context):
-    with pytest.raises(ErrorEmptyTitle) as exc_info:
+    with pytest.raises(EmptyTitleError) as exc_info:
         context["service"].create_expense(
             title="", amount=10, description="", expense_date=date.today()
         )
