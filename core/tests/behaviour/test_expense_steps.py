@@ -1,7 +1,7 @@
 from datetime import date
 import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
-
+from core.domain_error import (ErrorEmptyTitle)
 from core.expense_service import ExpenseService
 from core.in_memory_expense_repository import InMemoryExpenseRepository
 
